@@ -1,0 +1,53 @@
+---
+title: 'Tidy Tuesday #2'
+author: "Palma"
+date: "9/20/2021"
+output: html_document
+---
+
+
+## Tidy Tuesdsay #2
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2021-09-14')
+billboard <- tuesdata$billboard
+
+```
+
+```{r}
+billboard_mod <- billboard %>%
+                  select(week_position, instance, previous_week_position, peak_position, weeks_on_chart)
+```
+
+
+```{r}
+billboard_graph <- billboard_mod %>%
+    ggplot(aes(y = weeks_on_chart, x = peak_position)) +
+    geom_col(color = "#151c73") +
+    labs(x = "Weeks on the Chart", y = "Peak Billboard Position", title = "The Effect of Repeated Hit Songs on Speed to the Top of the Billboard List", subtitle = "Facet Wrapped by Instance -- by Anthony Palma") +
+    facet_wrap(~instance, scales = "free_y", nrow = 2) 
+```
+
+```{r}
+billboard_graph +
+  theme(panel.background = element_rect(fill = "#ed8c0e"), 
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        plot.background = element_rect(fill = "#151c73"), 
+        text = element_text(color = "#FFFFFF"), 
+        axis.text = element_text(color = "#FFFFFF"))
+
+```
+
+## **Question:  How does speed to the top of the billboard list become changed by that of a repeated song?**
+
+# I have heard of many songs going on and off the billboard top hits list.  I was curious as to how the speed to the top of the list is different from songs that only were popular for one stint compared to songs that went on and off the list many times, specifially on and off a lot of times.  As you can see, songs that are big hits one time only (ie on and off the list, not on and off several times) saw a very quick and steep rise to the top of the list (denoted by a steep slope down).  As the instance of the song increases, you can see less of a skew on the graph as opposed to the instance == 1 sharp right skew.  
+
