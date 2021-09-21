@@ -1,0 +1,29 @@
+---
+title: 'Tidy Tuesday #2'
+author: "Palma"
+date: "9/20/2021"
+output: html_document
+---
+
+
+## Tidy Tuesdsay #2
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2021-09-14')
+billboard <- tuesdata$billboard
+
+```
+
+```{r}
+billboard_mod <- billboard %>%
+                  select(week_position, song, performer, instance, previous_week_position, peak_position)
+```
+
