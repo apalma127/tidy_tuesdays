@@ -15,14 +15,10 @@ library(tidyverse)
 
 
 ```{r}
-
 tuesdata <- tidytuesdayR::tt_load('2021-09-07')
-
 results <- tuesdata$results
-
 ```
 
-**Question:  How does number of wins trend over the years for American drivers?**
 
 ```{r}
 driver_results_df <- tuesdata$driver_standings %>% 
@@ -44,13 +40,6 @@ df_Americans <- driver_results_by_nationality %>%
             summarize(total_wins = sum(wins))
 
 ```
-
-
-```{r}
-df_Americans
-```
-
-
 
 ```{r}
 Americans <- df_Americans %>%
